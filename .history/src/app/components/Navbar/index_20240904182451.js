@@ -91,7 +91,7 @@ const NavbarCustom = () => {
 
       const user = await authService.signUp(payload);
       if (user.status === 200) {
-        localStorage.setItem("user", JSON.stringify(user.data.data));
+        setUserData("user", JSON.stringify(user.data.data));
         closeSignupModal();
       }
     }
