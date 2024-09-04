@@ -1,0 +1,85 @@
+.cardWrapper{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    max-width: calc(25% - 15px);
+    box-shadow: -1px -1px 19px -15px rgba(0, 0, 0, 1);
+}
+.imageContentWrapper{
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+.cardType{
+    padding: 4px 14px;
+    opacity: 0.81;
+    border: none !important;
+    background-color: white;
+    text-transform: capitalize;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    pointer-events: none;
+}
+.cardImageWrapper{
+    display: flex;
+    width: 100%;
+    height: 195px;
+}
+.cardImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.textContentWrapper{
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+.cardHeading{
+    color: black;
+    font-weight: 600;
+}
+.cardDesc{
+    height: 72px;
+    line-height: 24px;
+    overflow: hidden;
+}
+.cardFeatures{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 6px 0;
+}
+.featureWrapper{
+    font-size: 13px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 120px;
+}
+.featureWrapper img{
+    width: 18px;
+}
+.featureWrapper p span{
+    font-size: 10px;
+}
+
+.refNumber{
+    color: #5e5a59;
+    line-height: 20px;
+}
+.cardFooter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.price{
+    font-size: 17px !important;
+    font-weight: bold;
+}

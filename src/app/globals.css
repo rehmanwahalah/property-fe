@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.container{
+  max-width: 80%;
+  margin: 0 auto;
+}
+.errorText {
+  color: red;
+  font-size: 0.875rem; /* Adjust the size as needed */
+  margin-top: 0.25rem; /* Space between the input and error message */
+}

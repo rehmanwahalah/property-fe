@@ -1,0 +1,94 @@
+.navbarContainer{
+    height: 80px;
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    padding: 0 20px;
+}
+.brandBox{
+    display: flex;
+    align-items: center;
+}
+.linksWrapper{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+.signupBtn,
+.loginBtn{
+    padding: 6px 12px;
+    border-radius: 6px;
+    background-color: #b93006;
+    color: #fff;
+    cursor: pointer;
+}
+.loginBtn{
+    margin-right: 10px;
+}
+.modalHeader{}
+.modalBody{}
+.formWrapper{
+    padding: 20px 40px;
+}
+.inputWrapper{
+    margin-bottom: 8px;
+}
+
+.inputWrapper .input{
+    padding: 8px;
+    font: inherit;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    outline: none;
+    transition: all 0.2s;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    height: calc(1.5em + .75rem + 2px);
+    border-radius: 4px;
+}
+.inputWrapper .input:focus{
+    box-shadow: inset 2px 2px 10px -5px #797979;
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+}
+.mycheckbox{
+    margin-bottom: 8px;
+    display: block;
+}
+.signInForgotPass{
+    margin-bottom: 8px;
+}
+.signInBtn{
+    padding: 8px;
+    border: none;
+    background-color: #82181A;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+.forgotBtn{
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out;
+    cursor: pointer;
+}
