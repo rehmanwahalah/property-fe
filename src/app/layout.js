@@ -1,7 +1,13 @@
-import { Inter } from "next/font/google";
+import Head from "next/head";
+import { Raleway } from "@next/font/google";
 import "./globals.css";
+import NavbarCustom from "./components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const raleway = Raleway({
+  weight: ["400", "500", "700"], // Specify the font weights you need
+  style: ["normal", "italic"], // Optionally, include italic styles
+  subsets: ["latin"], // Choose the subset (e.g., 'latin')
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +17,24 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <Head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          charset="UTF-8"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+        />
+      </Head>
+      <body className={raleway.className}>
+        <NavbarCustom />
+
+        {children}
+      </body>
     </html>
   );
 }

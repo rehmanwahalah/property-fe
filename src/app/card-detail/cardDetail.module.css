@@ -1,0 +1,42 @@
+.cardDetailWrapper {
+  padding: 40px 0;
+}
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.heading {
+  font-size: 35px;
+  font-weight: 800;
+  line-height: 1.17;
+  color: #5e5a59;
+  margin-bottom: 8px;
+}
+.infoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: roboto;
+}
+.price {
+  color: #5e5a59;
+  font-size: 23px;
+}
+.price span {
+  color: #b93006;
+}
+.ref {
+  color: #b93006;
+  font-size: 23px;
+}
+.ref span {
+  color: #5e5a59;
+}
+.sliderWrapper {
+  margin-top: 20px;
+  padding: 40px;
+  padding-bottom: 100px;
+  background-color: #f7f5f2;
+  width: 100%;
+}

@@ -1,0 +1,16 @@
+.slider-container {
+}
+.slider-container .slick-dots {
+  bottom: unset;
+  top: 100%;
+}
+.slider-container .slick-dots ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slider-container .slick-dots ul li {
+  width: 100px;
+  height: 60px;
+}

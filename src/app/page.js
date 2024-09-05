@@ -3,9 +3,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import classes from "./page.module.css";
 import Card from "./components/Card";
-import NavbarCustom from "./components/Navbar";
 import ReactPaginate from "react-paginate";
 import { propertyService } from "@/services/property.service";
+import { FaAngleLeft } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 
 export default function Home() {
   const [listings, setListings] = useState([]);
@@ -64,10 +65,8 @@ export default function Home() {
 
   return (
     <>
-      <NavbarCustom />
-
       {/* Search Input */}
-      <div className={classes.searchWrapper}>
+      <div className={`container ${classes.searchWrapper}`}>
         <input
           type="text"
           placeholder="Search by property name or location"
@@ -78,7 +77,7 @@ export default function Home() {
 
       <main className={classes.main}>
         {isLoading ? (
-          <p>Loading...</p>
+          <p className={classes.messageSpace}>Loading...</p>
         ) : (
           <section className={`container ${classes.cardsWrapper}`}>
             {listings?.length > 0 ? (
@@ -88,15 +87,25 @@ export default function Home() {
                 </React.Fragment>
               ))
             ) : (
-              <p>No properties found matching your search criteria.</p>
+              <div className={classes.messageSpace}>
+                No properties found matching your search criteria.
+              </div>
             )}
           </section>
         )}
 
         {/* React Pagination */}
         <ReactPaginate
-          previousLabel={"Previous"}
-          nextLabel={"Next"}
+          previousLabel={
+            <div className={classes.previousIconWrapper}>
+              <FaAngleLeft />
+            </div>
+          }
+          nextLabel={
+            <div className={classes.nextIconWrapper}>
+              <FaAngleRight />
+            </div>
+          }
           breakLabel={"..."}
           pageCount={totalPages} // Total number of pages
           marginPagesDisplayed={2}

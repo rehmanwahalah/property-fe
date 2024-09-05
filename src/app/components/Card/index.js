@@ -4,7 +4,6 @@ import classes from "./card.module.css";
 import ButtonPrimary from "../Button";
 
 const Card = ({ property }) => {
-
   return (
     <div className={classes.cardWrapper}>
       <div className={classes.imageContentWrapper}>

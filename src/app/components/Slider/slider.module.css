@@ -1,0 +1,19 @@
+.slide .slideContentWrapper {
+  display: flex;
+  justify-content: center;
+  height: 400px;
+}
+.slide .slideContentWrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.dotsImageWrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.dotsImageWrapper img {
+  height: 100%;
+  width: 100%;
+}

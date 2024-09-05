@@ -1,5 +1,74 @@
-.cardsWrapper{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+.cardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.searchWrapper {
+  display: flex;
+  justify-content: center;
+}
+.searchInput {
+  margin: 20px auto;
+  padding: 8px;
+  font: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 400px;
+  outline: none;
+  transition: all 0.2s;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  height: calc(1.5em + 0.75rem + 2px);
+  border-radius: 4px;
+}
+.messageSpace {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+}
+.input:focus {
+  box-shadow: inset 2px 2px 10px -5px #797979;
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+}
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 10px;
+}
+.previousIconWrapper,
+.nextIconWrapper {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c15a3b;
+  cursor: pointer;
+  border-radius: 50%;
+  color: #fff;
+}
+.previousIconWrapper:hover,
+.nextIconWrapper:hover {
+  color: #fff;
+  background-color: #b93006;
+}
+
+.activePage {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 900;
+  color: #5a5a5a;
+}
+.activePage::selection {
+  color: currentColor;
+  background-color: transparent;
 }
