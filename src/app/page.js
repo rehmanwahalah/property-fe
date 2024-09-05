@@ -20,8 +20,6 @@ export default function Home() {
     try {
       // Pass search term and page to API
       const resp = await propertyService.getPropertyListings(search, page, 20);
-      console.log(`RESP =>`, resp);
-
       if (resp.status === 200) {
         setListings(resp.data.data.listings); // Set the listings data
         setTotalPages(resp.data.data.pages); // Set the total pages

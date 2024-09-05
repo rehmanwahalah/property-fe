@@ -2,8 +2,17 @@
 import React from "react";
 import classes from "./card.module.css";
 import ButtonPrimary from "../Button";
+import { useRouter } from "next/navigation";
 
 const Card = ({ property }) => {
+  const router = useRouter(); // Initialize the router
+
+  // Function to handle redirection
+  const handleRedirect = () => {
+    // Redirect to the card-detail page, passing the property ID
+    router.push(`/card-detail?id=${property?._id}`);
+  };
+
   return (
     <div className={classes.cardWrapper}>
       <div className={classes.imageContentWrapper}>
@@ -13,7 +22,7 @@ const Card = ({ property }) => {
         {/* <div className={classes.favoriteIconWrapper}>
           <img className={classes.favoriteIcon} src="" alt="favorite" />
         </div> */}
-        <div className={classes.cardImageWrapper}>
+        <div onClick={handleRedirect} className={classes.cardImageWrapper}>
           <img
             className={classes.cardImage}
             src={property?.imgs[0]}
@@ -56,7 +65,7 @@ const Card = ({ property }) => {
           <ButtonPrimary
             className={classes.button}
             text="Quick Enquire"
-            onClick
+            onClick={handleRedirect}
           />
         </div>
       </div>
