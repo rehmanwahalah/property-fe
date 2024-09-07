@@ -35,7 +35,11 @@ function AppendDots({ images }) {
           images?.length &&
           images?.map((img, index) => {
             return (
-              <div id={`image-${index}`} className={classes.slide}>
+              <div
+                key={`${index + 1}`}
+                id={`image-${index}`}
+                className={classes.slide}
+              >
                 <div className={classes.slideContentWrapper}>
                   <img src={img} alt="Slide 1" />
                 </div>

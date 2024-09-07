@@ -23,8 +23,6 @@ const CardDetail = () => {
     if (id) fetchPropertDetails(id);
   }, [id]);
 
-  console.log(`PROPERY =>`, property);
-
   return (
     <div className={`container ${classes.cardDetailWrapper}`}>
       <div className={classes.textWrapper}>
