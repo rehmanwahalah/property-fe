@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import classes from "./cardDetail.module.css";
 import SliderPro from "../components/Slider";
 import { useSearchParams } from "next/navigation";
@@ -24,22 +24,24 @@ const CardDetail = () => {
   }, [id]);
 
   return (
-    <div className={`container ${classes.cardDetailWrapper}`}>
-      <div className={classes.textWrapper}>
-        <h1 className={classes.heading}>{property?.title || "N/A"}</h1>
-        <div className={classes.infoWrapper}>
-          <div className={classes.price}>
-            Price: <span>{property?.price || "N/A"}</span>
+    <Suspense>
+      <div className={`container ${classes.cardDetailWrapper}`}>
+        <div className={classes.textWrapper}>
+          <h1 className={classes.heading}>{property?.title || "N/A"}</h1>
+          <div className={classes.infoWrapper}>
+            <div className={classes.price}>
+              Price: <span>{property?.price || "N/A"}</span>
+            </div>
+            <div className={classes.ref}>
+              Ref: <span>{property?.id || "N/A"}</span>
+            </div>
           </div>
-          <div className={classes.ref}>
-            Ref: <span>{property?.id || "N/A"}</span>
+          <div className={classes.sliderWrapper}>
+            <SliderPro images={property?.imgs?.slice(0, 5)} />
           </div>
-        </div>
-        <div className={classes.sliderWrapper}>
-          <SliderPro images={property?.imgs?.slice(0, 5)} />
         </div>
       </div>
-    </div>
+    </Suspense>
   );
 };
 
