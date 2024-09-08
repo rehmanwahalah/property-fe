@@ -75,7 +75,9 @@ export default function Home() {
 
       <main className={classes.main}>
         {isLoading ? (
-          <p className={classes.messageSpace}>Loading...</p>
+          <p className={classes.messageSpace}>
+            <div class="loader"></div>
+          </p>
         ) : (
           <section className={`container ${classes.cardsWrapper}`}>
             {listings?.length > 0 ? (
@@ -93,28 +95,30 @@ export default function Home() {
         )}
 
         {/* React Pagination */}
-        <ReactPaginate
-          previousLabel={
-            <div className={classes.previousIconWrapper}>
-              <FaAngleLeft />
-            </div>
-          }
-          nextLabel={
-            <div className={classes.nextIconWrapper}>
-              <FaAngleRight />
-            </div>
-          }
-          breakLabel={"..."}
-          pageCount={totalPages} // Total number of pages
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={3}
-          onPageChange={handlePageClick} // Handle page click
-          containerClassName={classes.paginationWrapper} // Custom CSS for pagination container
-          activeClassName={classes.activePage} // Active page CSS
-          previousClassName={classes.previousButton} // Previous button CSS
-          nextClassName={classes.nextButton} // Next button CSS
-          disabledClassName={classes.disabledButton} // Disabled button CSS
-        />
+        {!isLoading && (
+          <ReactPaginate
+            previousLabel={
+              <div className={classes.previousIconWrapper}>
+                <FaAngleLeft />
+              </div>
+            }
+            nextLabel={
+              <div className={classes.nextIconWrapper}>
+                <FaAngleRight />
+              </div>
+            }
+            breakLabel={"..."}
+            pageCount={totalPages} // Total number of pages
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={3}
+            onPageChange={handlePageClick} // Handle page click
+            containerClassName={classes.paginationWrapper} // Custom CSS for pagination container
+            activeClassName={classes.activePage} // Active page CSS
+            previousClassName={classes.previousButton} // Previous button CSS
+            nextClassName={classes.nextButton} // Next button CSS
+            disabledClassName={classes.disabledButton} // Disabled button CSS
+          />
+        )}
       </main>
     </>
   );
