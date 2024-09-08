@@ -21,6 +21,7 @@ const NavbarCustom = () => {
     confirmPassword: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
   // Add a state to track user login/logout status
   const [isLoggedOut, setIsLoggedOut] = useState(false);
 
@@ -72,36 +73,54 @@ const NavbarCustom = () => {
   };
 
   const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    if (validateLogin()) {
-      const payload = {
-        identifier: loginForm.email,
-        password: loginForm.password,
-      };
+    try {
+      setIsLoading(true);
+      e.preventDefault();
+      if (validateLogin()) {
+        const payload = {
+          identifier: loginForm.email,
+          password: loginForm.password,
+        };
 
-      const user = await authService.login(payload);
-      if (user.status === 200) {
-        setUserData("user", JSON.stringify(user.data.data));
-        setIsLoggedOut(false); // User has logged in, update the state
-        closeLoginModal();
+        const user = await authService.login(payload);
+        if (user.status === 200) {
+          setUserData("user", JSON.stringify(user.data.data));
+          setIsLoggedOut(false); // User has logged in, update the state
+          closeLoginModal();
+          setIsLoading(false);
+        }
       }
+    } catch (error) {
+      setIsLoading(false);
+
+      if (error.response.data.statusCode == 401)
+        alert(error.response.data.message);
+
+      console.log(error);
     }
   };
 
   const handleSignupSubmit = async (e) => {
-    e.preventDefault();
-    if (validateSignup()) {
-      const payload = {
-        name: loginForm.name,
-        email: loginForm.email,
-        password: loginForm.password,
-      };
+    try {
+      e.preventDefault();
+      setIsLoading(true);
+      if (validateSignup()) {
+        const payload = {
+          name: signupForm.name,
+          email: signupForm.email,
+          password: signupForm.password,
+        };
 
-      const user = await authService.signUp(payload);
-      if (user.status === 200) {
-        setUserData(user.data.data);
-        closeSignupModal();
+        const user = await authService.signUp(payload);
+        if (user.status === 200) {
+          setUserData(user.data.data);
+          closeSignupModal();
+          setIsLoading(false);
+        }
       }
+    } catch (error) {
+      setIsLoading(false);
+      if (error.status == 409) alert("User already exist.");
     }
   };
 
@@ -109,8 +128,6 @@ const NavbarCustom = () => {
     removeUserData();
     setIsLoggedOut(true); // Set state to force re-render
   };
-
-  console.log(`userData =>`, userData);
 
   return (
     <>
@@ -184,12 +201,16 @@ const NavbarCustom = () => {
             </label>
 
             <div className={classes.signInForgotPass}>
-              <button className={classes.signInBtn} type="submit">
+              <button
+                disabled={isLoading}
+                className={classes.signInBtn}
+                type="submit"
+              >
                 Login
               </button>
-              <button className={classes.forgotBtn} type="button">
+              {/* <button className={classes.forgotBtn} type="button">
                 Forget Password
-              </button>
+              </button> */}
             </div>
           </form>
         </div>
@@ -277,7 +298,11 @@ const NavbarCustom = () => {
               </span>
             </label>
             <div className={classes.signInForgotPass}>
-              <button className={classes.signInBtn} type="submit">
+              <button
+                // disabled={isLoading}
+                className={classes.signInBtn}
+                type="submit"
+              >
                 Register
               </button>
             </div>
