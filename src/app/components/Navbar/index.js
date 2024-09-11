@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./navbar.module.css";
 import Modal from "../Modal";
 import { authService } from "@/services/auth";
@@ -9,6 +9,7 @@ import {
   removeUserData,
   setUserData,
 } from "../../../../utils/localstorage";
+import { HttpService } from "@/services/base.service";
 
 const NavbarCustom = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -84,7 +85,8 @@ const NavbarCustom = () => {
 
         const user = await authService.login(payload);
         if (user.status === 200) {
-          setUserData("user", JSON.stringify(user.data.data));
+          HttpService.setToken(user?.data.data.access_token);
+          setUserData(user.data.data);
           setIsLoggedOut(false); // User has logged in, update the state
           closeLoginModal();
           setIsLoading(false);
@@ -128,6 +130,18 @@ const NavbarCustom = () => {
     removeUserData();
     setIsLoggedOut(true); // Set state to force re-render
   };
+
+  useEffect(() => {
+    // Run this only once when the component mounts
+    const user = getUserData();
+    if (user) {
+      // Check if user data exists and access_token is present
+      if (user?.access_token) {
+        // Call the function to set the token
+        HttpService.setToken(user?.access_token);
+      }
+    }
+  }, []); // Empty dependency array ensures the effect runs only once
 
   return (
     <>

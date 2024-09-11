@@ -3,12 +3,20 @@ import React from "react";
 import classes from "./card.module.css";
 import ButtonPrimary from "../Button";
 import { useRouter } from "next/navigation";
+import { activityService } from "@/services/activity.service";
 
 const Card = ({ property }) => {
   const router = useRouter(); // Initialize the router
 
   // Function to handle redirection
-  const handleRedirect = () => {
+  const handleRedirect = async () => {
+    // Log the activity before redirecting
+    await activityService.createActivity({
+      propertyId: property._id,
+      action: "click",
+      timestamp: new Date(),
+    });
+
     // Redirect to the card-detail page, passing the property ID
     router.push(`/card-detail?id=${property?._id}`);
   };
