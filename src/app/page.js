@@ -7,6 +7,11 @@ import ReactPaginate from "react-paginate";
 import { propertyService } from "@/services/property.service";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
+import {
+  getLocalStorageData,
+  setLocalStorageData,
+} from "../../utils/localstorage";
+import { activityService } from "@/services/activity.service";
 
 export default function Home() {
   const [listings, setListings] = useState([]);
@@ -16,13 +21,23 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false); // Loading state
 
   const fetchProperties = async (search = "", page = 1) => {
+    const sessionId = getLocalStorageData("sessionId");
+
     setIsLoading(true);
     try {
       // Pass search term and page to API
-      const resp = await propertyService.getPropertyListings(search, page, 20);
+      const resp = await propertyService.getPropertyListings(
+        search,
+        page,
+        20,
+        sessionId || ""
+      );
+
       if (resp.status === 200) {
-        setListings(resp.data.data.listings); // Set the listings data
-        setTotalPages(resp.data.data.pages); // Set the total pages
+        setListings(resp.data.data.listings.listings); // Set the listings data
+        setTotalPages(resp.data.data.listings.pages); // Set the total pages
+        if (!sessionId)
+          setLocalStorageData(resp.data.data.sessionId, "sessionId");
       }
     } catch (error) {
       console.log(error);
@@ -46,10 +61,21 @@ export default function Home() {
   };
 
   // Handle search input and debounce it
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     const searchValue = e.target.value;
     setSearchTerm(searchValue);
     setCurrentPage(0); // Reset to the first page (0 for react-paginate, 1 for API call)
+    try {
+      // Log the activity before redirecting
+      await activityService.createActivity({
+        sessionId: getLocalStorageData("sessionId"),
+        searchQuery: searchValue,
+        action: "search_query",
+        timestamp: new Date(),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Debounced search function (wait for 500ms after user stops typing)

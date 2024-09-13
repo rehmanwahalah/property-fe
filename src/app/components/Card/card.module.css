@@ -44,10 +44,29 @@
   font-weight: 600;
 }
 .cardDesc {
-  height: 72px;
   line-height: 24px;
   overflow: hidden;
+  max-height: 72px; /* Collapsed height */
+  transition: max-height 0.3s ease;
 }
+.cardDesc.expanded {
+  max-height: none; /* Expanded height */
+}
+.toggleButton {
+  background: none;
+  color: #0070f3;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  padding: 0;
+  margin-top: 5px;
+}
+
+.toggleButton:hover {
+  text-decoration: none;
+}
+
 .cardFeatures {
   display: flex;
   gap: 10px;

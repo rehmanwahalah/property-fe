@@ -5,6 +5,7 @@ import SliderPro from "../../components/Slider/index";
 import { useSearchParams } from "next/navigation";
 import { propertyService } from "@/services/property.service";
 import { activityService } from "@/services/activity.service";
+import { getLocalStorageData } from "../../../../utils/localstorage";
 
 const CardDetailComponent = () => {
   const searchParams = useSearchParams();
@@ -29,6 +30,7 @@ const CardDetailComponent = () => {
           try {
             console.log(`COMPONENT KILLED`);
             await activityService.createActivity({
+              sessionId: getLocalStorageData("sessionId"),
               propertyId: id, // Property ID from the query
               action: "time_spent", // Action is "time_spent"
               timestamp: new Date(),
@@ -66,6 +68,7 @@ const CardDetailComponent = () => {
       hasLoggedViewRef.current = true; // Mark as logged
       try {
         await activityService.createActivity({
+          sessionId: getLocalStorageData("sessionId"),
           propertyId: id,
           action: "view",
           timestamp: new Date(),
@@ -83,6 +86,21 @@ const CardDetailComponent = () => {
     }
   }, [id]); // Add dependencies to run only once when id changes and hasn't been logged yet
 
+  const handleSlideClick = async (index, img) => {
+    try {
+      /**
+       * track next image event
+       */
+      await activityService.createActivity({
+        sessionId: getLocalStorageData("sessionId"),
+        searchQuery: searchValue,
+        action: "next_image",
+        timestamp: new Date(),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Suspense>
       <div className={`container ${classes.cardDetailWrapper}`}>
@@ -97,7 +115,10 @@ const CardDetailComponent = () => {
             </div>
           </div>
           <div className={classes.sliderWrapper}>
-            <SliderPro images={property?.imgs?.slice(0, 5)} />
+            <SliderPro
+              images={property?.imgs?.slice(0, 5)}
+              onSlideClick={handleSlideClick}
+            />
           </div>
         </div>
       </div>

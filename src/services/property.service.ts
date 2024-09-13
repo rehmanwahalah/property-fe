@@ -5,9 +5,9 @@ class PropertyService extends HttpService {
 
   getDashboardListings = (): Promise<any> =>
     this.get(`${this.prefix}/listings/dashboard`);
-  getPropertyListings = (search, page, limit): Promise<any> =>
+  getPropertyListings = (search, page, limit, sessionId): Promise<any> =>
     this.get(
-      `${this.prefix}/listings?search=${search}&page=${page}&resPerPage=${limit}`
+      `${this.prefix}/listings?search=${search}&page=${page}&resPerPage=${limit}&sessionId=${sessionId}`
     );
   getPropertyDetail = (id): Promise<any> =>
     this.get(`${this.prefix}/detail?id=${id}`);
