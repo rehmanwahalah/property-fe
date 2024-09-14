@@ -93,7 +93,7 @@ const CardDetailComponent = () => {
        */
       await activityService.createActivity({
         sessionId: getLocalStorageData("sessionId"),
-        searchQuery: searchValue,
+        propertyId: id, // Property ID from the query
         action: "next_image",
         timestamp: new Date(),
       });

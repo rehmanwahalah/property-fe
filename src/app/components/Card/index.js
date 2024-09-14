@@ -36,6 +36,7 @@ const Card = ({ property }) => {
       // Log the activity before redirecting
       await activityService.createActivity({
         sessionId: getLocalStorageData("sessionId"),
+        propertyId: property._id,
         action: "show_more",
         timestamp: new Date(),
       });
