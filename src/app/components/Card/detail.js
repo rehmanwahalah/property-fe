@@ -10,6 +10,7 @@ import { getLocalStorageData } from "../../../../utils/localstorage";
 const CardDetailComponent = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id"); // Get the property ID from the query string
+  const propertyId = searchParams.get("propertyId"); // Get the property ID from the query string
   const [property, setProperty] = useState({});
   const [startTime, setStartTime] = useState(null); // State to store the start time
   const hasLoggedViewRef = useRef(false); // useRef to track if "view" activity is logged
@@ -35,6 +36,7 @@ const CardDetailComponent = () => {
               action: "time_spent", // Action is "time_spent"
               timestamp: new Date(),
               duration: timeSpent, // Time spent in seconds
+              id: propertyId, // this is propert id from the dataset
             });
           } catch (error) {
             console.error("Error logging time spent activity:", error);
@@ -72,6 +74,7 @@ const CardDetailComponent = () => {
           propertyId: id,
           action: "view",
           timestamp: new Date(),
+          id: propertyId, // this is propert id from the dataset
         });
       } catch (error) {
         console.error("Error logging view activity:", error);
@@ -93,14 +96,17 @@ const CardDetailComponent = () => {
        */
       await activityService.createActivity({
         sessionId: getLocalStorageData("sessionId"),
-        propertyId: id, // Property ID from the query
-        action: "next_image",
+        propertyId: id, // monogdb Property ID from the query
+        action: "nxt_img_detail",
         timestamp: new Date(),
+        id: propertyId,  // this is propert id from the dataset
       });
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(`propertyId =>`, propertyId);
+
   return (
     <Suspense>
       <div className={`container ${classes.cardDetailWrapper}`}>

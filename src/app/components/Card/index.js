@@ -16,12 +16,13 @@ const Card = ({ property }) => {
     await activityService.createActivity({
       sessionId: getLocalStorageData("sessionId"),
       propertyId: property._id,
+      id: property.id,
       action: "click",
       timestamp: new Date(),
     });
 
     // Redirect to the card-detail page, passing the property ID
-    router.push(`/card-detail?id=${property?._id}`);
+    router.push(`/card-detail?id=${property?._id}&propertyId=${property?.id}`);
   };
 
   // Shortened summary if it's greater than 50 characters
@@ -37,7 +38,8 @@ const Card = ({ property }) => {
       await activityService.createActivity({
         sessionId: getLocalStorageData("sessionId"),
         propertyId: property._id,
-        action: "show_more",
+        id: property.id,
+        action: "read_more_listing",
         timestamp: new Date(),
       });
     }
