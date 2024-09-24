@@ -5,12 +5,20 @@ class PropertyService extends HttpService {
 
   getDashboardListings = (): Promise<any> =>
     this.get(`${this.prefix}/listings/dashboard`);
-  getPropertyListings = (search, page, limit, sessionId): Promise<any> =>
+  getPropertyListings = (
+    search,
+    page,
+    limit,
+    sessionId,
+    recommendations
+  ): Promise<any> =>
     this.get(
-      `${this.prefix}/listings?search=${search}&page=${page}&resPerPage=${limit}&sessionId=${sessionId}`
+      `${this.prefix}/listings?search=${search}&page=${page}&resPerPage=${limit}&sessionId=${sessionId}&recommendations=${recommendations}`
     );
   getPropertyDetail = (id): Promise<any> =>
     this.get(`${this.prefix}/detail?id=${id}`);
+  fetchRecommendations = (payload: any): Promise<any> =>
+    this.postWithOurBaseUrl(`https://bardd-search-pt.hf.space/search`, payload);
 }
 // nextEnergy;
 

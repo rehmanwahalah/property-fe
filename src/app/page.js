@@ -25,12 +25,20 @@ export default function Home() {
 
     setIsLoading(true);
     try {
+      let recommendations = [];
+      if (sessionId) {
+        const recommendationResp = await propertyService.fetchRecommendations({
+          user_search_query: search,
+        });
+        recommendations = recommendationResp.data;
+      }
       // Pass search term and page to API
       const resp = await propertyService.getPropertyListings(
         search,
         page,
         20,
-        sessionId || ""
+        sessionId || "",
+        recommendations
       );
 
       if (resp.status === 200) {
