@@ -27,10 +27,19 @@ export default function Home() {
     try {
       let recommendations = [];
       if (sessionId) {
-        const recommendationResp = await propertyService.fetchRecommendations({
-          user_search_query: search,
-        });
-        recommendations = recommendationResp.data;
+        if (search) {
+          const recommendationResp = await propertyService.fetchRecommendations(
+            {
+              user_search_query: search,
+            }
+          );
+          recommendations = recommendationResp.data;
+        } else {
+          const recommendationResp =
+            await propertyService.getPropertyRecommendations();
+          console.log(`recommendationResp =>`, recommendationResp);
+          recommendations = recommendationResp.data;
+        }
       }
       // Pass search term and page to API
       const resp = await propertyService.getPropertyListings(

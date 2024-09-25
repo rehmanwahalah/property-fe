@@ -19,6 +19,8 @@ class PropertyService extends HttpService {
     this.get(`${this.prefix}/detail?id=${id}`);
   fetchRecommendations = (payload: any): Promise<any> =>
     this.postWithOurBaseUrl(`https://bardd-search-pt.hf.space/search`, payload);
+  getPropertyRecommendations = (): Promise<any> =>
+    this.getWithOutBaseUrl(`https://bardd-rec-pt.hf.space/recommendations`);
 }
 // nextEnergy;
 

@@ -31,6 +31,24 @@ export class HttpService {
 
     return test;
   };
+
+  /**
+   * Fetch data from server
+   * @param url Endpoint link
+   * @return Promise
+   */
+  protected getWithOutBaseUrl = async (
+    url: string,
+    params?: any
+  ): Promise<any> => {
+    const test = await axios.get(url, {
+      params,
+      cancelToken: this.source.token,
+    });
+
+    return test;
+  };
+
   /**
    * Write data over server
    * @param url Endpoint link

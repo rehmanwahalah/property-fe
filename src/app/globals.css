@@ -47,3 +47,13 @@ body {
   color: #c15a3b !important;
   font-size: 30px !important;
 }
+.swiper-button-prev:after, .swiper-button-next:after {
+  font-size: 15px !important;
+  color: white;
+}
+.swiper-button-prev, .swiper-button-next {
+  background-color: red;
+  border-radius: 50%;
+  height: 30px !important;
+  width: 30px !important;
+}

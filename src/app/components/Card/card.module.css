@@ -103,3 +103,26 @@
   font-size: 17px !important;
   font-weight: bold;
 }
+.slider-container {
+}
+.slider-container .slick-dots {
+  bottom: unset;
+  top: 100%;
+}
+.slider-container .slick-dots ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slider-container .slick-dots ul li {
+  width: 100px;
+  height: 60px;
+}
+.button{
+  cursor: pointer;
+}
+.swiper-button-prev:after, .swiper-button-next:after {
+  font-size: 25px !important;
+  color: red;
+}

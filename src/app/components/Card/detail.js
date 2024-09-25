@@ -15,6 +15,8 @@ const CardDetailComponent = () => {
   const [startTime, setStartTime] = useState(null); // State to store the start time
   const hasLoggedViewRef = useRef(false); // useRef to track if "view" activity is logged
 
+  const [showMore, setShowMore] = useState(false); // State to track "Show More" or "Show Less"
+
   useEffect(() => {
     // When the component mounts (user lands on the page), capture the start time
     const entryTime = Date.now();
@@ -99,13 +101,33 @@ const CardDetailComponent = () => {
         propertyId: id, // monogdb Property ID from the query
         action: "nxt_img_detail",
         timestamp: new Date(),
-        id: propertyId,  // this is propert id from the dataset
+        id: propertyId, // this is propert id from the dataset
       });
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(`propertyId =>`, propertyId);
+
+  const handleToggleDescription = async (event) => {
+    setShowMore((prevShowMore) => !prevShowMore); // Toggle between expanded and collapsed
+    if (event === "Show More") {
+      // Log the activity before redirecting
+      await activityService.createActivity({
+        sessionId: getLocalStorageData("sessionId"),
+        propertyId: property._id,
+        id: property.id,
+        action: "read_more_detail",
+        timestamp: new Date(),
+      });
+    }
+  };
+
+  const descriptionToShow = property?.desc
+    ? showMore
+      ? property?.desc
+      : property?.desc.slice(0, 300) +
+        (property?.desc.length > 300 ? "..." : "")
+    : "N/A";
 
   return (
     <Suspense>
@@ -125,6 +147,21 @@ const CardDetailComponent = () => {
               images={property?.imgs?.slice(0, 5)}
               onSlideClick={handleSlideClick}
             />
+          </div>
+          <div>
+            <span>Description: {descriptionToShow}</span>
+            {property?.desc && property?.desc.length > 100 && (
+              <button
+                onClick={() => {
+                  handleToggleDescription(
+                    showMore ? "Show Less" : "Show More"
+                  );
+                }}
+                className={classes.showMoreBtn}
+              >
+                {showMore ? "Show Less" : "Show More"}
+              </button>
+            )}
           </div>
         </div>
       </div>

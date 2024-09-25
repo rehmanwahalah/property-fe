@@ -5,6 +5,16 @@ import ButtonPrimary from "../Button";
 import { useRouter } from "next/navigation";
 import { activityService } from "@/services/activity.service";
 import { getLocalStorageData } from "../../../../utils/localstorage";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+
+// import './styles.css';
+
+// import required modules
+import { Navigation } from "swiper/modules";
 
 const Card = ({ property }) => {
   const router = useRouter(); // Initialize the router
@@ -45,6 +55,23 @@ const Card = ({ property }) => {
     }
   };
 
+  const handleSlideClick = async (index) => {
+    try {
+      /**
+       * track next image event
+       */
+      await activityService.createActivity({
+        sessionId: getLocalStorageData("sessionId"),
+        propertyId: property._id, // monogdb Property ID from the query
+        action: "nxt_img_listing",
+        timestamp: new Date(),
+        id: property.id, // this is propert id from the dataset
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={classes.cardWrapper}>
       <div className={classes.imageContentWrapper}>
@@ -54,12 +81,25 @@ const Card = ({ property }) => {
         {/* <div className={classes.favoriteIconWrapper}>
           <img className={classes.favoriteIcon} src="" alt="favorite" />
         </div> */}
-        <div onClick={handleRedirect} className={classes.cardImageWrapper}>
-          <img
+        <div className={classes.cardImageWrapper}>
+          <Swiper
+            navigation={true}
+            modules={[Navigation]}
+            className="mySwiper"
+            onSlideChange={(swiper) => handleSlideClick(swiper.activeIndex)}
+          >
+            {property?.imgs?.map((imgUrl, index) => (
+              <SwiperSlide key={index}>
+                <img src={imgUrl} alt={`Slide ${index + 1}`} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* <img
             className={classes.cardImage}
             src={property?.imgs[0]}
             alt="cardImage"
-          />
+          /> */}
         </div>
       </div>
       <div className={classes.textContentWrapper}>
