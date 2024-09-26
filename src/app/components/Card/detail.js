@@ -129,6 +129,33 @@ const CardDetailComponent = () => {
         (property?.desc.length > 300 ? "..." : "")
     : "N/A";
 
+  // Styles for the scrollable box
+  const scrollableBoxStyle = {
+    maxHeight: showMore ? "none" : "150px", // Height limit
+    overflowY: showMore ? "visible" : "auto", // Scroll if needed
+    padding: "10px", // Padding inside the box
+    border: "1px solid #ddd", // Border around the box
+    borderRadius: "4px", // Rounded corners
+    backgroundColor: "#f9f9f9", // Light background
+    position: "relative",
+    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", // Font family
+    fontSize: "16px", // Font size
+    lineHeight: "1.6", // Line spacing for better readability
+    textAlign: "justify", // Justify text
+    marginTop: "20px", // Add space between the slider and the description box
+  };
+  
+  const showMoreBtnStyle = {
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+    padding: "10px 15px",
+    cursor: "pointer",
+    borderRadius: "4px",
+    fontSize: "14px",
+    marginTop: "10px",
+  };
+
   return (
     <Suspense>
       <div className={`container ${classes.cardDetailWrapper}`}>
@@ -149,15 +176,13 @@ const CardDetailComponent = () => {
             />
           </div>
           <div>
-            <span>Description: {descriptionToShow}</span>
+            <div style={scrollableBoxStyle}>
+              <span>Description: {descriptionToShow}</span>
+            </div>
             {property?.desc && property?.desc.length > 100 && (
               <button
-                onClick={() => {
-                  handleToggleDescription(
-                    showMore ? "Show Less" : "Show More"
-                  );
-                }}
-                className={classes.showMoreBtn}
+                onClick={handleToggleDescription}
+                style={showMoreBtnStyle}
               >
                 {showMore ? "Show Less" : "Show More"}
               </button>

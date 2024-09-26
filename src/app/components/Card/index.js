@@ -103,7 +103,9 @@ const Card = ({ property }) => {
         </div>
       </div>
       <div className={classes.textContentWrapper}>
-        <div className={classes.cardHeading}>{property?.title || "N/A"}</div>
+        <div onClick={handleRedirect} className={classes.cardHeading}>
+          {property?.title || "N/A"}
+        </div>
         {/* <div className={classes.cardDesc}>{property?.thumbnail_summary}</div> */}
         <div
           className={`${classes.cardDesc} ${

@@ -42,6 +42,7 @@
 .cardHeading {
   color: black;
   font-weight: 600;
+  cursor: pointer;
 }
 .cardDesc {
   line-height: 24px;
