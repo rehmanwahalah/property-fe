@@ -161,9 +161,11 @@ const NavbarCustom = () => {
             </>
           ) : (
             <>
-              {userData?.user?.name}
-              <div className={classes.loginBtn} onClick={handleLogout}>
-                Logout
+              <div className={classes.userInfoWrapper}>
+                <span className={classes.userName}>{userData?.user?.name}</span>
+                <div className={classes.loginBtn} onClick={handleLogout}>
+                  Logout
+                </div>
               </div>
             </>
           )}

@@ -80,3 +80,37 @@
   color: currentColor;
   background-color: transparent;
 }
+
+.loginMessageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh; /* Adjusted to center the message in the viewport */
+}
+
+.loginMessage {
+  background-color: #f9f9f9; /* Light background color */
+  padding: 20px 30px; /* Padding for space inside */
+  border: 2px solid #d9534f; /* Red border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for a lifted effect */
+  text-align: center; /* Center text */
+  font-size: 1.2rem; /* Slightly larger font size */
+  color: #333; /* Text color */
+}
+
+.loginButton {
+  margin-top: 15px; /* Space above the button */
+  padding: 10px 20px; /* Padding inside the button */
+  background-color: #d9534f; /* Red background */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 1rem; /* Adjust font size */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.loginButton:hover {
+  background-color: #c9302c; /* Darker red on hover */
+}

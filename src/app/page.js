@@ -37,7 +37,6 @@ export default function Home() {
         } else {
           const recommendationResp =
             await propertyService.getPropertyRecommendations();
-          console.log(`recommendationResp =>`, recommendationResp);
           recommendations = recommendationResp.data;
         }
       }
@@ -104,65 +103,80 @@ export default function Home() {
     setCurrentPage(selectedPage);
   };
 
+  const userData = localStorage.getItem("user");
+
   return (
     <>
-      {/* Search Input */}
-      <div className={`container ${classes.searchWrapper}`}>
-        <input
-          type="text"
-          placeholder="Search by property name or location"
-          onChange={debouncedSearch} // Debounced search input
-          className={classes.searchInput}
-        />
-      </div>
+      {userData ? (
+        <>
+          {/* Search Input */}
+          <div className={`container ${classes.searchWrapper}`}>
+            <input
+              type="text"
+              placeholder="Search by property name or location"
+              onChange={debouncedSearch} // Debounced search input
+              className={classes.searchInput}
+            />
+          </div>
 
-      <main className={classes.main}>
-        {isLoading ? (
-          <p className={classes.messageSpace}>
-            <div class="loader"></div>
-          </p>
-        ) : (
-          <section className={`container ${classes.cardsWrapper}`}>
-            {listings?.length > 0 ? (
-              listings?.map((property, i) => (
-                <React.Fragment key={i}>
-                  <Card property={property} />
-                </React.Fragment>
-              ))
+          <main className={classes.main}>
+            {isLoading ? (
+              <p className={classes.messageSpace}>
+                <div class="loader"></div>
+              </p>
             ) : (
-              <div className={classes.messageSpace}>
-                No properties found matching your search criteria.
-              </div>
+              <section className={`container ${classes.cardsWrapper}`}>
+                {listings?.length > 0 ? (
+                  listings?.map((property, i) => (
+                    <React.Fragment key={i}>
+                      <Card property={property} />
+                    </React.Fragment>
+                  ))
+                ) : (
+                  <div className={classes.messageSpace}>
+                    No properties found matching your search criteria.
+                  </div>
+                )}
+              </section>
             )}
-          </section>
-        )}
 
-        {/* React Pagination */}
-        {!isLoading && (
-          <ReactPaginate
-            previousLabel={
-              <div className={classes.previousIconWrapper}>
-                <FaAngleLeft />
-              </div>
-            }
-            nextLabel={
-              <div className={classes.nextIconWrapper}>
-                <FaAngleRight />
-              </div>
-            }
-            breakLabel={"..."}
-            pageCount={totalPages} // Total number of pages
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={3}
-            onPageChange={handlePageClick} // Handle page click
-            containerClassName={classes.paginationWrapper} // Custom CSS for pagination container
-            activeClassName={classes.activePage} // Active page CSS
-            previousClassName={classes.previousButton} // Previous button CSS
-            nextClassName={classes.nextButton} // Next button CSS
-            disabledClassName={classes.disabledButton} // Disabled button CSS
-          />
-        )}
-      </main>
+            {/* React Pagination */}
+            {!isLoading && (
+              <ReactPaginate
+                previousLabel={
+                  <div className={classes.previousIconWrapper}>
+                    <FaAngleLeft />
+                  </div>
+                }
+                nextLabel={
+                  <div className={classes.nextIconWrapper}>
+                    <FaAngleRight />
+                  </div>
+                }
+                breakLabel={"..."}
+                pageCount={totalPages} // Total number of pages
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick} // Handle page click
+                containerClassName={classes.paginationWrapper} // Custom CSS for pagination container
+                activeClassName={classes.activePage} // Active page CSS
+                previousClassName={classes.previousButton} // Previous button CSS
+                nextClassName={classes.nextButton} // Next button CSS
+                disabledClassName={classes.disabledButton} // Disabled button CSS
+              />
+            )}
+          </main>
+        </>
+      ) : (
+        <div className={classes.loginMessageWrapper}>
+          <div className={classes.loginMessage}>
+            <p>
+              <strong>Login to Explore</strong> – Please log in to view the
+              property listings.
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 }

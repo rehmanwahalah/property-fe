@@ -2,6 +2,7 @@
 export const setUserData = (userData) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("user", JSON.stringify(userData));
+    window.location.reload("/");
   }
 };
 
@@ -17,6 +18,7 @@ export const getUserData = () => {
 export const removeUserData = () => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("user");
+    window.location.reload("/");
   }
 };
 
