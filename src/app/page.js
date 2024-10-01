@@ -9,6 +9,7 @@ import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import {
   getLocalStorageData,
+  getUserData,
   setLocalStorageData,
 } from "../../utils/localstorage";
 import { activityService } from "@/services/activity.service";
@@ -103,7 +104,7 @@ export default function Home() {
     setCurrentPage(selectedPage);
   };
 
-  const userData = localStorage.getItem("user");
+  const userData = getUserData();
 
   return (
     <>
